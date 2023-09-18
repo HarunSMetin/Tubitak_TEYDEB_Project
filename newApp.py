@@ -432,7 +432,16 @@ class Ui_Dialog(QtWidgets.QDialog):
             maxIndex_temp = np.argmax(PolinomArray_temp) 
             self.PolyDf.loc[:,c] = PolinomArray_temp
             tepeX =  x[maxIndex_temp]
-            # Polinomial Regresyon modelini uygulama
+
+            x_new1 = np.linspace(tepeX-2, tepeX+2, 10000)
+
+            if self.activateFirstLorentzian.isChecked() == True:
+                y_fit1 = self.lorentzian(x_new1, *fit_params)
+            else:
+                y_fit1= poly_temp(x_new1)
+                    
+            tepeX = x_new1[y_fit1.argmax()]  
+            
             if self.activateSecondPol.isChecked() == True or  self.activateSecondLorentzian.isChecked() == True:
                 alt =  int(self.get_index(x,tepeX-offset,0))
                 ust =  int(self.get_index(x,tepeX+offset,1))
@@ -457,7 +466,15 @@ class Ui_Dialog(QtWidgets.QDialog):
                 maxIndex = np.argmax(y_fit)
                 max_x =  x[maxIndex]
                 max_y =  y_fit[maxIndex]
+                
+                x_new = np.linspace(max_x-2, max_x+2, 10000)
 
+                if self.activateSecondPol.isChecked() == True:
+                   y_fit= poly(x_new)
+                elif self.activateSecondLorentzian.isChecked() == True:
+                    y_fit = self.lorentzian(x_new, *fit_params)
+                max_x = x_new[y_fit.argmax()]
+                max_y = y_fit.max()
                 print(max_x , max_y)
 
                 self.listOfPeaks.append(max_x)  
