@@ -448,13 +448,13 @@ class Ui_Dialog(QtWidgets.QDialog):
                 
                 if self.activateSecondPol.isChecked() == True:
                     poly = np.poly1d(np.polyfit(x, y, degree))
-                    PolinomArray= poly(x)
-                    maxIndex = np.argmax(PolinomArray) 
+                    y_fit= poly(x) 
+                    
                 elif self.activateSecondLorentzian.isChecked() == True:
                     fit_params, _ = curve_fit(self.lorentzian, x, y, p0=initial_guess,maxfev=4000000)
                     y_fit = self.lorentzian(x, *fit_params)
-                    maxIndex = np.argmax(y_fit)
-                
+               
+                maxIndex = np.argmax(y_fit)
                 max_x =  x[maxIndex]
                 max_y =  y_fit[maxIndex]
 
