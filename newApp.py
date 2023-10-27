@@ -366,6 +366,9 @@ class Ui_Dialog(QtWidgets.QDialog):
 
     def MakeGrafs(self):  
 
+        newOff=10
+        linspaceCount = 200000
+
         tepeDegree = self.bigPolyDegree.value()
         degree = self.littlePolyDegree.value()
         offset = self.offsetOfPoly.value()
@@ -433,7 +436,7 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.PolyDf.loc[:,c] = PolinomArray_temp
             tepeX =  x[maxIndex_temp]
 
-            x_new1 = np.linspace(tepeX-2, tepeX+2, 10000)
+            x_new1 = np.linspace(tepeX-newOff, tepeX+newOff, linspaceCount)
 
             if self.activateFirstLorentzian.isChecked() == True:
                 y_fit1 = self.lorentzian(x_new1, *fit_params)
@@ -465,9 +468,9 @@ class Ui_Dialog(QtWidgets.QDialog):
                
                 maxIndex = np.argmax(y_fit)
                 max_x =  x[maxIndex]
-                max_y =  y_fit[maxIndex]
+                #max_y =  y_fit[maxIndex]
                 
-                x_new = np.linspace(max_x-2, max_x+2, 10000)
+                x_new = np.linspace(max_x-newOff, max_x+newOff, linspaceCount)
 
                 if self.activateSecondPol.isChecked() == True:
                    y_fit= poly(x_new)

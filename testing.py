@@ -31,11 +31,11 @@ def get_index(array ,threshold, op):
 def lorentzian(x, x0, gamma, A):
         return A * (gamma**2 / ((x - x0)**2 + gamma**2))  
   
-def MakeGrafs(title,df,firstDegree,secondDegree,offset,file_path, activateSecondPol ,activateFirstLorentzian,activateSecondLorentzian, linspaceCount = 10000):  
+def MakeGrafs(title,df,firstDegree,secondDegree,offset,file_path, activateSecondPol ,activateFirstLorentzian,activateSecondLorentzian, linspaceCount = 200000):  
 
         file_path = file_path[:-5]
         PolyDf = df.copy()
-        print(PolyDf)
+        print(title+' started')
         x = PolyDf.NM.to_numpy()
         nanometers = x.copy()
         columnsOfDf = PolyDf.columns[1:] 
@@ -63,7 +63,7 @@ def MakeGrafs(title,df,firstDegree,secondDegree,offset,file_path, activateSecond
             PolyDf.loc[:,c] = PolinomArray_temp
             tepeX =  x[maxIndex_temp]
 
-            x_new1 = np.linspace(tepeX-2, tepeX+2, linspaceCount)
+            x_new1 = np.linspace(tepeX-10, tepeX+10, linspaceCount)
 
             if activateFirstLorentzian: 
                 y_fit1 = lorentzian(x_new1, *fit_params)
@@ -97,15 +97,15 @@ def MakeGrafs(title,df,firstDegree,secondDegree,offset,file_path, activateSecond
                 max_x =  x[maxIndex]
                 #max_y =  y_fit[maxIndex]
                 
-                x_new = np.linspace(max_x-2, max_x+2, linspaceCount)
+                x_new = np.linspace(max_x-10, max_x+10, linspaceCount)
 
                 if activateSecondPol:
-                   y_fit= poly(x_new)
+                    y_fit= poly(x_new)
                 elif activateSecondLorentzian:
                     y_fit = lorentzian(x_new, *fit_params)
                 max_x = x_new[y_fit.argmax()]
                 #max_y = y_fit.max()
-                print(max_x )
+                #print(max_x )
 
                 listOfPeaks.append(max_x)  
             else:
