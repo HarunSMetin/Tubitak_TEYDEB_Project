@@ -12,13 +12,12 @@ import pyqtgraph as pg
 from PyQt5 import QtCore, QtGui, QtWidgets 
 from PyQt5.QtWidgets import QFileDialog
 import os  
-
+from datetime import datetime
 
 
 class Ui_Dialog(QtWidgets.QDialog):
     file_path = ""
     def setupUi(self, Dialog): 
-         
         Dialog.setObjectName("Dialog")
         Dialog.resize(1280,800)
 
@@ -120,86 +119,51 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.label_4 = QtWidgets.QLabel(self.horizontalLayoutWidget)
-        self.label_4.setFont(font)
-        self.label_4.setObjectName("label_4")
-        self.horizontalLayout.addWidget(self.label_4)
-
-        self.xmaxGraph = QtWidgets.QDoubleSpinBox(self.horizontalLayoutWidget)
-        self.xmaxGraph.setMaximum(100000.0)
-        self.xmaxGraph.setFont(font)
-        self.xmaxGraph.setObjectName("maxGraph")
-        self.horizontalLayout.addWidget(self.xmaxGraph)
-
-        self.label_5 = QtWidgets.QLabel(self.horizontalLayoutWidget)
-        self.label_5.setFont(font)
-        self.label_5.setObjectName("label_5")
-        self.horizontalLayout.addWidget(self.label_5)
-        self.xminGraph = QtWidgets.QDoubleSpinBox(self.horizontalLayoutWidget)
-
-        
-        self.xminGraph.setFont(font)
-        self.xminGraph.setObjectName("minGraph")
-        self.horizontalLayout.addWidget(self.xminGraph)     
-        
-        self.label_6 = QtWidgets.QLabel(self.horizontalLayoutWidget)
-        self.label_6.setFont(font)
-        self.label_6.setObjectName("label_6")
-        self.horizontalLayout.addWidget(self.label_6)
-        self.xminGraph.setMaximum(100000.0)
-        
-        self.ymaxGraph = QtWidgets.QDoubleSpinBox(self.horizontalLayoutWidget)
-        self.ymaxGraph.setMaximum(100000.0)
-        self.ymaxGraph.setFont(font)
-        self.ymaxGraph.setObjectName("ymaxGraph")
-        self.horizontalLayout.addWidget(self.ymaxGraph)
-
-        self.label_7 = QtWidgets.QLabel(self.horizontalLayoutWidget)
-        self.label_7.setFont(font)
-        self.label_7.setObjectName("label_7")
-        self.horizontalLayout.addWidget(self.label_7)
-        self.xminGraph.setMaximum(100000.0)
-        
-        self.yminGraph = QtWidgets.QDoubleSpinBox(self.horizontalLayoutWidget)
-        self.yminGraph.setMaximum(100000.0)
-        self.yminGraph.setFont(font)
-        self.yminGraph.setObjectName("yminGraph")
-        self.horizontalLayout.addWidget(self.yminGraph)
-
-        self.regenerateGraph = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.regenerateGraph.setFont(font)
-        self.regenerateGraph.setObjectName("regenerateGraph")
-        self.horizontalLayout.addWidget(self.regenerateGraph)
-
+       
         self.line_2 = QtWidgets.QFrame(Dialog)
-        self.line_2.setGeometry(QtCore.QRect(0, 135, 1280, 20))
+        self.line_2.setGeometry(QtCore.QRect(0, 145, 1280, 20))
         self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
 
         self.activateSecondPol = QtWidgets.QCheckBox(Dialog)
-        self.activateSecondPol.setGeometry(QtCore.QRect(20, 112, 331, 25))
+        self.activateSecondPol.setGeometry(QtCore.QRect(20, 125, 331, 25))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.activateSecondPol.setFont(font)
         self.activateSecondPol.setObjectName("activateSecondPol")
 
         self.activateSecondLorentzian = QtWidgets.QCheckBox(Dialog)
-        self.activateSecondLorentzian.setGeometry(QtCore.QRect(250, 112, 331, 25))
+        self.activateSecondLorentzian.setGeometry(QtCore.QRect(250, 125, 331, 25))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.activateSecondLorentzian.setFont(font)
         self.activateSecondLorentzian.setObjectName("activateSecondLorentzian")
 
         self.activateFirstLorentzian = QtWidgets.QCheckBox(Dialog)
-        self.activateFirstLorentzian.setGeometry(QtCore.QRect(480, 112, 331, 25))
+        self.activateFirstLorentzian.setGeometry(QtCore.QRect(480, 125, 331, 25))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.activateFirstLorentzian.setFont(font)
         self.activateFirstLorentzian.setObjectName("activateFirstLorentzian")
 
+     
+ 
+ 
+
+        self.labelLinspaceCount = QtWidgets.QLabel(Dialog)
+        font.setPointSize(14)
+        self.labelLinspaceCount.setFont(font)
+        self.labelLinspaceCount.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.labelLinspaceCount.setObjectName("labelLinspaceCount")
+        self.labelLinspaceCount.setGeometry(QtCore.QRect(400, 165, 180, 25)) 
+
+        self.LinspaceCount = QtWidgets.QSpinBox(Dialog)
+        self.LinspaceCount.setFont(font)
+        self.LinspaceCount.setObjectName("LinspaceCount")
+        self.LinspaceCount.setMaximum(1000000)
+        self.LinspaceCount.setProperty("value", 20000)
+        self.LinspaceCount.setGeometry(QtCore.QRect(550, 165, 110, 25)) 
 
         self.bigPolyOut = QtWidgets.QCheckBox(Dialog)
         self.bigPolyOut.setGeometry(QtCore.QRect(900, 10, 331, 31))
@@ -226,8 +190,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-        self.fileLocate.clicked.connect(self.browsefiles)
-        self.regenerateGraph.clicked.connect(self.regenerateGraphFunc)
+        self.fileLocate.clicked.connect(self.browsefiles) 
         self.OK.clicked.connect(self.outputGenerate)
         self.ProgressBarUpdater(0)
         self.activateSecondPol.stateChanged.connect(self.activateSecondPolFunc)
@@ -252,12 +215,16 @@ class Ui_Dialog(QtWidgets.QDialog):
     def activateSecondLorentzianFunc(self):
 
         if self.activateSecondLorentzian.isChecked() == True:
+            
+            self.littlePolyOut.setEnabled(True)
             self.activateSecondPol.setCheckState(False)
             self.offsetOfPoly.setEnabled(True)
             self.label_2.setEnabled(True)
             self.windowsSizeLabel.setEnabled(True)
             self.windowsSize.setEnabled(True)
         else:
+            
+            self.littlePolyOut.setEnabled(False) 
             self.offsetOfPoly.setEnabled(False)
             self.label_2.setEnabled(False)
             self.windowsSize.setEnabled(False)
@@ -265,7 +232,7 @@ class Ui_Dialog(QtWidgets.QDialog):
 
     def activateSecondPolFunc(self):
         if self.activateSecondPol.isChecked() == True:
-            #self.littlePolyOut.setEnabled(True)
+            self.littlePolyOut.setEnabled(True)
             self.activateSecondLorentzian.setCheckState(False)
             self.offsetOfPoly.setEnabled(True)
             self.littlePolyDegree.setEnabled(True)
@@ -297,42 +264,15 @@ class Ui_Dialog(QtWidgets.QDialog):
 
     fname =[]
     def browsefiles(self):
+        self.oldFilePath = self.filePathEdit.text() 
         fname=QFileDialog.getOpenFileName(None, 'Open file', os.getcwd(), 'Excel Files (*.xlsx)')
-        self.filePathEdit.setText(fname[0])
+        self.filePathEdit.setText(fname[0]) 
 
-    def regenerateGraphFunc(self):
-        maxindex=self.find_nearest_index(self.listOfPeaks ,self.xmaxGraph.value())
-        minindex=self.find_nearest_index(self.listOfPeaks ,self.xminGraph.value())
-        dataList =self.listOfPeaks[maxindex:minindex]
-        self.showPlot(pd.DataFrame(data=[range(len(dataList)),dataList]))
-
+ 
     def outputGenerate(self):
         self.OK.setEnabled(False)
         QtCore.QCoreApplication.processEvents()
         self.MakeGrafs()   
-
-    def retranslateUi(self, Dialog):
-        _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Spectrum Analyzer"))
-        self.label_2.setText(_translate("Dialog", "Offset (Pozitif olmalı)"))
-        self.label_3.setText(_translate("Dialog", "Küçük Parçanın Polinom Derecesi"))
-        self.label.setText(_translate("Dialog", "Genel Polinomun Derecesi"))
-        self.OK.setText(_translate("Dialog", "Polinomu Üret"))
-        self.fileLocate.setText(_translate("Dialog", "Dosya Belirt"))
-        self.label_4.setText(_translate("Dialog", "X Maximum Değer"))
-        self.label_5.setText(_translate("Dialog", "X Minimum Değer"))
-        self.label_6.setText(_translate("Dialog", "Y Maximum Değer")) 
-        self.label_7.setText(_translate("Dialog", "Y Minimum Değer"))
-        
-        self.windowsSizeLabel.setText(_translate("Dialog", "Ortalama alınacak deger sayısı"))
-        self.regenerateGraph.setText(_translate("Dialog", "Yeniden Grafik yap"))
-        self.bigPolyOut.setText(_translate("Dialog", "Genel Polinomu Çıktı Al"))
-        self.littlePolyOut.setText(_translate("Dialog", "Parça Polinomu Çıktı Al"))
-        self.peaksOut.setText(_translate("Dialog", "Tepe Değerleri Çıktı Al"))
-        self.activateSecondPol.setText(_translate("Dialog", "2. polinomu aktif et"))
-        
-        self.activateSecondLorentzian.setText(_translate("Dialog", "2. Lorentzian Fit aktif et"))
-        self.activateFirstLorentzian.setText(_translate("Dialog", "1. Lorentzian Fit aktif et"))
 
     def find_nearest_index(self,array, value):
         array = np.asarray(array)
@@ -361,45 +301,44 @@ class Ui_Dialog(QtWidgets.QDialog):
         else: 
             self.progressBar.setProperty("value",self.progressBar.value() + v)
         QtCore.QCoreApplication.processEvents()
+    
     def lorentzian(self,x, x0, gamma, A):
         return A * (gamma**2 / ((x - x0)**2 + gamma**2))
 
-    def MakeGrafs(self):  
-
-        newOff=10
-        linspaceCount = 200000
+    def MakeGrafs(self):   
+        linspaceCount = self.LinspaceCount.value()
 
         tepeDegree = self.bigPolyDegree.value()
         degree = self.littlePolyDegree.value()
         offset = self.offsetOfPoly.value()
         file_path = self.filePathEdit.text() 
-        
-        print("EXCEL OKUMA BASLADI") 
-        df = pd.read_excel(file_path)
-        QtCore.QCoreApplication.processEvents()
-        print("EXCEL OKUMA BITTI") 
-        
-        print("EXTINCTION HESAPlAMA BASLADI") 
-        df=df.drop(df.index[0])
-        df=df.drop(df.index[0])
-        df=df.drop(df.index[1])
-        df.reset_index(drop=True, inplace=True) 
-        df.columns = df.iloc[0]
-        df=df.drop(df.index[0])  
-        df.reset_index(drop=True, inplace=True) 
-        df.style.hide()
-        df.columns = ['NM'] + [f'{col}{i+1}' for i, col in enumerate(df.columns[1:])]
-        df= df.astype(float)
-        df.iloc[:, 1:] = 1 - (10 ** (-df.iloc[:, 1:]))
+        if self.oldFilePath != file_path:
+            print("EXCEL OKUMA BASLADI") 
+            df = pd.read_excel(file_path)
+            QtCore.QCoreApplication.processEvents()
+            print("EXCEL OKUMA BITTI") 
 
+            print("EXTINCTION HESAPlAMA BASLADI") 
+            df=df.drop(df.index[0])
+            df=df.drop(df.index[0])
+            df=df.drop(df.index[1])
+            df.reset_index(drop=True, inplace=True) 
+            df.columns = df.iloc[0]
+            df=df.drop(df.index[0])  
+            df.reset_index(drop=True, inplace=True) 
+            df.style.hide()
+            df.columns = ['NM'] + [f'{col}{i+1}' for i, col in enumerate(df.columns[1:])]
+            df= df.astype(float)
+            df.iloc[:, 1:] = 1 - (1/(10 ** (df.iloc[:, 1:])))
+            print("EXTINCTION HESAPlAMA BITTI")
 
-        print("EXTINCTION HESAPlAMA BITTI")
-
-        self.file_path = file_path[:-5]
-        df.to_csv( self.file_path+"_extinction.csv",index=True,sep=';', decimal=',')
+            self.file_path = file_path[:-5]
+            df.to_csv( self.file_path+"_extinction.csv",index=True,sep=';', decimal=',')
+        else :  
+            df=self.oldDf
 
         self.PolyDf = df 
-
+        self.oldDf = df.copy()
         print(df)
         time.sleep(1)
         self.ProgressBarUpdater(0)
@@ -415,47 +354,68 @@ class Ui_Dialog(QtWidgets.QDialog):
         A = 0.09463919098664426
         x0 = 274.3146806018545
         gamma = 585.8269681890237 
-
         initial_guess = [ A,x0, gamma]
-        for c in self.PolyDf.columns:
-        # Örnek veri oluşturma   
-            self.ProgressBarUpdater(1)
 
-            QtCore.QCoreApplication.processEvents()              
-            x = x_copy
-            y =self.PolyDf[c].to_numpy() 
+        self.tepeX = -1
+        alt_crop = 0
+        ust_crop = len(x_copy)
+        cropFlag = False
+
+        for c in self.PolyDf.columns:
             
+            y = self.PolyDf[c].to_numpy() 
+            if self.tepeX != -1 :
+                if cropFlag == False:
+                    alt_crop =  int(self.get_index(x_copy,self.tepeX-60,0))
+                    ust_crop =  int(self.get_index(x_copy,self.tepeX+60,1))
+
+                    if(alt_crop<0 or alt_crop==-1):
+                        alt_crop=0
+                    if(ust_crop>len(x_copy) or  ust_crop==-1):
+                        ust_crop= len(x_copy)
+
+                    x_copy=x_copy[alt_crop:ust_crop] 
+                    y= self.PolyDf[c].to_numpy() 
+                    y=y[alt_crop:ust_crop] 
+
+                    cropFlag = True
+                else :  
+                    y= self.PolyDf[c].to_numpy() 
+                    y=y[alt_crop:ust_crop]      
+
+            self.ProgressBarUpdater(1)
+            QtCore.QCoreApplication.processEvents()              
+            x = x_copy 
             if self.activateFirstLorentzian.isChecked() == True:
                 fit_params, _ = curve_fit(self.lorentzian, x, y, p0=initial_guess,maxfev=4000000)
                 PolinomArray_temp = self.lorentzian(x, *fit_params)
             else:
                 poly_temp = np.poly1d(np.polyfit(x, y, tepeDegree))
                 PolinomArray_temp= poly_temp(x)
-
+           
             maxIndex_temp = np.argmax(PolinomArray_temp) 
-            self.PolyDf.loc[:,c] = PolinomArray_temp
-            tepeX =  x[maxIndex_temp]
+            self.PolyDf.loc[alt_crop:ust_crop-1,c] = PolinomArray_temp
+            self.tepeX =  x[maxIndex_temp]
 
-            x_new1 = np.linspace(tepeX-newOff, tepeX+newOff, linspaceCount)
-
+            x_new1 = np.linspace(min(x),max(x), linspaceCount)
             if self.activateFirstLorentzian.isChecked() == True:
                 y_fit1 = self.lorentzian(x_new1, *fit_params)
             else:
                 y_fit1= poly_temp(x_new1)
                     
-            tepeX = x_new1[y_fit1.argmax()]  
+            self.tepeX = x_new1[y_fit1.argmax()]  
             
             if self.activateSecondPol.isChecked() == True or  self.activateSecondLorentzian.isChecked() == True:
-                alt =  int(self.get_index(x,tepeX-offset,0))
-                ust =  int(self.get_index(x,tepeX+offset,1))
+                alt =  int(self.get_index(x_new1,self.tepeX-offset,0))
+                ust =  int(self.get_index(x_new1,self.tepeX+offset,1))
 
                 if(alt<0 or alt==-1):
                     alt=0
-                if(ust>len(x) or  ust==-1):
-                    ust= len(x)
+                if(ust>len(x_new1) or  ust==-1):
+                    ust= len(x_new1)
                 
-                x=x[alt:ust]
-                y=y[alt:ust]
+                x=x_new1[alt:ust]
+                y=y_fit1[alt:ust]
 
                 
                 if self.activateSecondPol.isChecked() == True:
@@ -470,36 +430,65 @@ class Ui_Dialog(QtWidgets.QDialog):
                 max_x =  x[maxIndex]
                 #max_y =  y_fit[maxIndex]
                 
-                x_new = np.linspace(max_x-newOff, max_x+newOff, linspaceCount)
+                x_new = np.linspace(max_x-offset, max_x+offset, linspaceCount)
 
                 if self.activateSecondPol.isChecked() == True:
                    y_fit= poly(x_new)
                 elif self.activateSecondLorentzian.isChecked() == True:
                     y_fit = self.lorentzian(x_new, *fit_params)
+
+
+                xOfLittle = np.array(x_new)
+                yOfLittle = np.array(y_fit)
+                self.littlePolyOutDF = pd.DataFrame({'X': xOfLittle, 'Y': list(yOfLittle)}, columns=['X', 'Y'])
+
                 max_x = x_new[y_fit.argmax()]
                 max_y = y_fit.max()
-                print(max_x , max_y)
-
-                self.listOfPeaks.append(max_x)  
+                #print(max_x , max_y)
+                if cropFlag:
+                    self.listOfPeaks.append(max_x)  
             else:
-                self.listOfPeaks.append(tepeX)
+                if cropFlag:
+                    self.listOfPeaks.append(self.tepeX)
 
         if int(self.windowsSize.value()) > 0:
             self.listOfPeaks = self.apply_median_filter(self.listOfPeaks,int(self.windowsSize.value()))
         self.showPlot(pd.DataFrame(data=[range(len(self.listOfPeaks)),self.listOfPeaks]))
 
+     
+        out_filename=self.file_path     
+        #add date time to filename
+        now = str(datetime.datetime.now())    
+        out_filename+=now.strftime("%Y_%m_%d_%H_%M_%S_%f")[:-3] 
+        if self.activateFirstLorentzian.isChecked() == True:
+            out_filename += "_firstLorentzian"
+        else:
+            out_filename += "_firstPol"+str(tepeDegree)
+        if self.activateSecondPol.isChecked() == True :
+            out_filename += "_secondPol"+str(degree)+"_degree"
+        if self.activateSecondLorentzian.isChecked() == True:
+            out_filename += "_secondLorentzian"
+            
+        
         self.ProgressBarUpdater(0)
         if(self.bigPolyOut.isChecked() == True):
             print("Big Poly Out Started")
             self.PolyDf = pd.concat([pd.Series(self.nanometers, name='NM'),  self.PolyDf], axis=1)
-            self.PolyDf.transpose().to_csv(self.file_path+"_outputOfFirstPoly.csv",index=True,sep=';', decimal=',')
+            self.PolyDf = self.PolyDf[alt_crop:ust_crop,:]
+            self.PolyDf.transpose().to_csv(out_filename+"_outputOfFirstPoly.csv",index=True,sep=';', decimal=',')
             print("Big Poly Out Finished")
-            self.ProgressBarUpdater(50)
+            self.ProgressBarUpdater(33)
+        if(self.littlePolyOut.isChecked() == True):
+            print("Little Poly Out Started")
+            self.littlePolyOutDF.transpose().to_csv(out_filename+"_outputOfSecondPoly"+str(offset)+".csv",index=True,sep=';', decimal=',')
+            print("Little Poly Out Finished")
+            self.ProgressBarUpdater(33)
+
         if (self.peaksOut.isChecked() ==  True): 
             print("Peaks Out Started") 
             (pd.DataFrame(data=[columnsOfDf,self.listOfPeaks])).transpose().to_excel(self.file_path+"_outputOfPeakPoints.xlsx",index=False) 
             print("Peaks Out Finished")	
-            self.ProgressBarUpdater(50)
+            self.ProgressBarUpdater(34)
         
         self.ProgressBarUpdater(100)
         time.sleep(1)  
@@ -518,6 +507,27 @@ class Ui_Dialog(QtWidgets.QDialog):
             filtered_y.append(median_value)
         
         return  filtered_y
+
+    def retranslateUi(self, Dialog):
+        _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "Spectrum Analyzer"))
+        self.label_2.setText(_translate("Dialog", "Offset (Pozitif olmalı)"))
+        self.label_3.setText(_translate("Dialog", "Küçük Parçanın Polinom Derecesi"))
+        self.label.setText(_translate("Dialog", "Genel Polinomun Derecesi"))
+        self.OK.setText(_translate("Dialog", "Polinomu Üret"))
+        self.fileLocate.setText(_translate("Dialog", "Dosya Belirt"))
+      
+        
+        self.windowsSizeLabel.setText(_translate("Dialog", "Ortalama alınacak deger sayısı"))
+        
+        self.bigPolyOut.setText(_translate("Dialog", "Genel Polinomu Çıktı Al"))
+        self.littlePolyOut.setText(_translate("Dialog", "Parça Polinomu Çıktı Al"))
+        self.peaksOut.setText(_translate("Dialog", "Tepe Değerleri Çıktı Al"))
+        self.activateSecondPol.setText(_translate("Dialog", "2. polinomu aktif et"))
+        
+        self.activateSecondLorentzian.setText(_translate("Dialog", "2. Lorentzian Fit aktif et"))
+        self.activateFirstLorentzian.setText(_translate("Dialog", "1. Lorentzian Fit aktif et")) 
+        self.labelLinspaceCount.setText(_translate("Dialog", "Linspace Sayısı"))
    
 
 if __name__ == "__main__":
